@@ -18,6 +18,19 @@ Slider::Slider()
 
 	this->selector_colour = Colour::FromRGB(96,96,96);
 	this->track_colour = Colour::FromRGB(0,0,0);
+
+	this->on_click = std::bind(&Slider::onClick,this,std::placeholders::_1,std::placeholders::_2);
+}
+
+void Slider::onClick(double x,double y)
+{
+	if(
+		x >= 2 && x <= this->width - 2 
+		&& 
+		y >= ((this->height / 2) - ((3.0 / 16.0) * this->height)) && y <= ((this->height / 2) + ((3.0 / 16.0) * this->height)))
+	{
+		this->value = (x - 2) / (this->width - 4);
+	}
 }
 
 void Slider::onDraw()

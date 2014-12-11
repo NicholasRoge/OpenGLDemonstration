@@ -37,6 +37,8 @@ namespace Window
 	extern UINT style_extended;
 	extern int width;
 
+	void Close();
+
 	/* Lifecycle Stuff */
 	void Create(HINSTANCE context);
 

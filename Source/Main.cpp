@@ -5,6 +5,7 @@
 #include <string>
 #include "UI.h"
 #include "Window.h"
+#include <windowsx.h>
 
 #define TIMER_RENDER 0x1
 
@@ -82,9 +83,8 @@ LRESULT CALLBACK HandleMessage(HWND window_handle,UINT message,WPARAM w_param,LP
 		case WM_CLOSE:
 			KillTimer(Window::handle,TIMER_RENDER);
 			break;
-		case WM_KEYDOWN:
-			SendMessage(Window::handle,WM_CLOSE,0,0);
-
+		case WM_LBUTTONUP:
+			UI::DelegateClick(GET_X_LPARAM(l_param),GET_Y_LPARAM(l_param));
 			return 0;
 		case WM_OPEN:
 			EnableTransparency();

@@ -15,6 +15,9 @@ namespace UI
 			Graphics::Colour track_colour;
 			float value;
 
+		private:
+			void onClick(double x,double y);
+
 		protected:
 			virtual void onDraw();
 

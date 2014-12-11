@@ -36,6 +36,11 @@ namespace Window
 	UINT style_extended = WS_EX_APPWINDOW;
 	int width = 640;
 
+	void Close()
+	{
+		SendMessage(Window::handle,WM_CLOSE,0,0);
+	}
+
 	void Create(HINSTANCE context)
 	{
 		Window::context = context;

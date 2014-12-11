@@ -34,6 +34,8 @@ namespace UI
 			ElementContainer();
 
 			virtual void addChild(Element* child);
+
+			virtual void click(double x,double y);
 	};
 }
 

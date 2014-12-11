@@ -26,6 +26,14 @@ Element::~Element()
 {
 }
 
+void Element::click(double x,double y)
+{
+	if(this->isClickable())
+	{
+		this->on_click(x,y);
+	}
+}
+
 void Element::draw()
 {
 	OpenGL::TranslateOrigin(this->x,this->y);
@@ -51,6 +59,11 @@ double Element::inner_height() const
 double Element::inner_width() const
 {
 	return this->width;
+}
+
+bool Element::isClickable() const
+{
+	return (bool)this->on_click;
 }
 
 void Element::setBackgroundColour(Colour colour)

@@ -38,6 +38,14 @@ namespace UI
 	ElementContainer* titlebar;
 
 	/* Function Definitions */
+	void DelegateClick(double x,double y)
+	{
+		if(x >= root->x && x <= root->x + root->width)
+		{
+			root->click(x - root->x,y - root->y);
+		}
+	}
+
 	void Draw()
 	{
 		UpdateColours();
@@ -80,6 +88,10 @@ namespace UI
 		close_icon->x = titlebar->inner_width() - close_icon->width;
 		close_icon->y = 0;
 		close_icon->setSourceFile("./Resource/Icon/Close.bmp");
+		close_icon->on_click = [](double x,double y)
+		{
+			Window::Close();
+		};
 		titlebar->addChild(close_icon);
 
 		title = new Label();
@@ -196,38 +208,43 @@ namespace UI
 	void UpdateColours()
 	{
 		static char buffer[4];
-		static byte delta_red = 1;
-		static byte delta_green = 0;
-		static byte delta_blue = 0;
+		//static byte delta_red = 1;
+		//static byte delta_green = 0;
+		//static byte delta_blue = 0;
 
-		/* Update the colour itself */
-		if(delta_red == 1)
-		{
-			theme_colour.red += delta_red;
-			if(theme_colour.red == 69)
-			{
-				delta_red = 0;
-				delta_green = 1;
-			}
-		}
-		else if(delta_green == 1)
-		{
-			theme_colour.green += delta_green;
-			if(theme_colour.green == 69)
-			{
-				delta_green = 0;
-				delta_blue = 1;
-			}
-		}
-		else if(delta_blue == 1)
-		{
-			theme_colour.blue += delta_blue;
-			if(theme_colour.blue == 69)
-			{
-				delta_blue = 0;
-				delta_red = 1;
-			}
-		}
+		///* Update the colour itself */
+		//if(delta_red == 1)
+		//{
+		//	theme_colour.red += delta_red;
+		//	if(theme_colour.red == 69)
+		//	{
+		//		delta_red = 0;
+		//		delta_green = 1;
+		//	}
+		//}
+		//else if(delta_green == 1)
+		//{
+		//	theme_colour.green += delta_green;
+		//	if(theme_colour.green == 69)
+		//	{
+		//		delta_green = 0;
+		//		delta_blue = 1;
+		//	}
+		//}
+		//else if(delta_blue == 1)
+		//{
+		//	theme_colour.blue += delta_blue;
+		//	if(theme_colour.blue == 69)
+		//	{
+		//		delta_blue = 0;
+		//		delta_red = 1;
+		//	}
+		//}
+
+		/* Update the colours themselves. */
+		theme_colour.red = (byte)(slider_red->value * 255);
+		theme_colour.green = (byte)(slider_green->value * 255);
+		theme_colour.blue = (byte)(slider_blue->value * 255);
 
 		/* Update the colours in the elements. */
 		root->border.colour = theme_colour;

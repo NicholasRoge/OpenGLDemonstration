@@ -21,6 +21,17 @@ void ElementContainer::addChild(Element* child)
 	child->parent = this;
 }
 
+void ElementContainer::click(double x,double y)
+{
+	for(auto& child : this->children)
+	{
+		if(x >= child->x && x <= child->x + child->width && y >= child->y && y <= child->y + child->width)
+		{
+			child->click(x - ((this->width - this->inner_width()) / 2) - child->x,y - ((this->height - this->inner_height()) / 2) - child->y);
+		}
+	}
+}
+
 void ElementContainer::onDraw()
 {
 	this->Element::onDraw();
